@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Статистика</h1>
+
+    <h2>Средний балл по всем заданиям</h2>
+    <p>{{ avg_score.avg|default:"нет данных" }}</p>
+
+    <h2>Курсы и количество учеников</h2>
+    {% for course in courses %}
+        <p>{{ course.title }} — учеников: {{ course.students_count }}</p>
+    {% endfor %}
+
+    <h2>Лучший балл по курсам</h2>
+    {% for item in best_scores %}
+        <p>{{ item.exercise__lesson__course__title }} — макс. балл: {{ item.max_score }}</p>
+    {% endfor %}
+
+    <h2>Активные записи на курсы</h2>
+    {% for enrollment in active_enrollments %}
+        <p>{{ enrollment.user }} → {{ enrollment.course }} (до {{ enrollment.access_until }})</p>
+    {% endfor %}
+</body>
+</html>

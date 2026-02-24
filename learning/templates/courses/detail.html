@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>{{ course.title }}</h1>
+    <p>Уровень: {{ course.level }}</p>
+    <h2>Уроки</h2>
+    {% for lesson in lessons %}
+        <p>{{ lesson.order }}. {{ lesson.title }}</p>
+    {% endfor %}
+</body>
+</html>

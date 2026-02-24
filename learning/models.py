@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MaxValueValidator
@@ -62,7 +64,13 @@ class UserRole(models.Model):
 
     def __str__(self):
         return f"{self.user} — {self.role}"
-    
+
+
+# Возвращает курсы, у которых есть хотя бы один урок.
+class PublishedCourseManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(lessons__isnull=False).distinct()
+
 
 class Course(models.Model):
     title = models.CharField(max_length=200, verbose_name=_("Название курса"))
@@ -81,7 +89,12 @@ class Course(models.Model):
         verbose_name=_("Преподаватели")
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Создан"))
+    objects = models.Manager() 
+    published = PublishedCourseManager()
 
+    def get_absolute_url(self):
+        return reverse('course_detail', args=[self.pk]) #результат: '/courses/5/'
+    
     def __str__(self):
         return self.title
 
@@ -105,7 +118,7 @@ class TeacherCourse(models.Model):
     )
 
     class Meta:
-        unique_together = ('teacher', 'course'),
+        unique_together = ('teacher', 'course')
         verbose_name = _("Назначение преподавателей")
         verbose_name_plural = _("Назначения преподавателей")
 
@@ -114,6 +127,18 @@ class TeacherCourse(models.Model):
     
 
 class UserCourse(models.Model):
+
+    class Status(models.TextChoices):
+        PENDING  = 'pending',  _('Ожидает оплаты')
+        ACTIVE   = 'active',   _('Активен')
+        FINISHED = 'finished', _('Завершён')
+
+    status = models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.PENDING,
+        verbose_name=_("Статус")
+    )
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -135,6 +160,12 @@ class UserCourse(models.Model):
     )
     enrolled_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Дата записи"))
     progress = models.FloatField(default=0.0, verbose_name=_("Прогресс (%)"))
+    access_until = models.DateTimeField(null = True, blank=True, verbose_name=_("Доступ до"))
+
+    def is_access_expired(self):
+        if self.access_until is None:
+            return False
+        return timezone.now() > self.access_until
 
     class Meta:
         unique_together = ('user', 'course')
@@ -225,7 +256,11 @@ class Result(models.Model):
     )
     completed_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Дата выполнения"))
 
+    def is_completed_today(self):
+        return self.completed_at.date() == timezone.now().date()
+    
     class Meta:
+        ordering = ['-completed_at'] # сначала новые результаты
         unique_together = ('user', 'exercise')
         verbose_name = _("Результат")
         verbose_name_plural = _("Результаты")

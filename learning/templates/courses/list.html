@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Курсы уровня A1</h1>
+    {% for course in courses %}
+        <p>
+            <a href="{{ course.get_absolute_url }}">{{ course.title }}</a>
+            — {{ course.level }}
+        </p>
+    {% empty %}
+        <p>Курсов не найдено</p>
+    {% endfor %}
+</body>
+</html>
