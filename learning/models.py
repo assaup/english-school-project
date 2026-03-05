@@ -88,6 +88,14 @@ class Course(models.Model):
         related_name='teaching_courses',
         verbose_name=_("Преподаватели")
     )
+    students = models.ManyToManyField(
+        User,
+        through='UserCourse',
+        through_fields=('course', 'user'),
+        related_name='student_in_courses',
+        verbose_name=("Ученики")
+
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Создан"))
     objects = models.Manager() 
     published = PublishedCourseManager()

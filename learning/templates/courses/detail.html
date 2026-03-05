@@ -3,6 +3,9 @@
 <body>
     <h1>{{ course.title }}</h1>
     <p>Уровень: {{ course.level }}</p>
+    <a href="{% url 'course_edit' course.pk %}">Редактировать</a>
+    <a href="{% url 'course_delete' course.pk %}">Удалить</a>
+
     <h2>Уроки</h2>
     {% for lesson in lessons %}
         <p>{{ lesson.order }}. {{ lesson.title }}</p>
