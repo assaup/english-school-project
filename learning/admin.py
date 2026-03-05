@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
+from .pdf_utils import generate_course_pdf
 from .models import (
     Role, Level, User, UserRole,
     Course, TeacherCourse, UserCourse,
@@ -96,12 +97,17 @@ class CourseAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     raw_id_fields = ('level',)
     readonly_fields = ('created_at',)
+    actions = ['export_as_pdf']
     inlines = [LessonInline, TeacherCourseInline, UserCourseInline]
 
     fieldsets = (
         (None, {'fields': ('title', 'level', 'description')}),
         (_('Даты'), {'fields': ('created_at',)}),
     )
+    @admin.action(description='Скачать PDF')
+    def export_as_pdf(self, request, queryset):
+        course = queryset.first()
+        return generate_course_pdf(course)
 
     @admin.display(description=_("Преподавателей"))
     def get_teachers_count(self, obj):

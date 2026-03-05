@@ -58,7 +58,7 @@ def stats_view(request):
 
 def course_create(request):
     if request.method == 'POST':
-        form = CourseForm(request.POST)
+        form = CourseForm(request.POST, request.FILES)
         if form.is_valid():
             course = form.save()
             messages.success(request, f'Курс "{course.title}" создан!')
@@ -70,7 +70,7 @@ def course_create(request):
 def course_edit(request, pk):
     course = get_object_or_404(Course, pk=pk)
     if request.method == 'POST':
-        form = CourseForm(request.POST, instance=course)
+        form = CourseForm(request.POST, request.FILES, instance=course)
         if form.is_valid():
             form.save()
             messages.success(request, f'Курс "{course.title}" обновлён!')

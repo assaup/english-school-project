@@ -94,7 +94,12 @@ class Course(models.Model):
         through_fields=('course', 'user'),
         related_name='student_in_courses',
         verbose_name=("Ученики")
-
+    )
+    cover = models.ImageField(
+        upload_to='courses/covers/',
+        null=True,
+        blank=True,
+        verbose_name=_("Обложка курса")
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Создан"))
     objects = models.Manager() 
@@ -193,6 +198,12 @@ class Lesson(models.Model):
         on_delete=models.CASCADE,
         related_name='lessons',
         verbose_name=_("Курс")
+    )
+    attachment = models.FileField(
+        upload_to='lessons/files/',
+        null=True,
+        blank=True,
+        verbose_name=_("Прикрепленный файл")
     )
 
     class Meta:
