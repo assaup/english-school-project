@@ -3,20 +3,26 @@ from django.utils import timezone
 from django.db.models import Avg, Count, Max
 from django.contrib import messages
 from .forms import CourseForm
-from .models import Course, Lesson, Result, UserCourse
+from .models import Course, Lesson, Result, UserCourse, User
 
 # Пример filter(), order_by(), __ для обращения к связанной таблице
 def course_list(request):
+    query = request.GET.get('q', '')
     courses = (
         Course.objects
         .select_related('level')
         # .filter(level__name='A1')
-        .exclude(lessons__isnull=True)
+        # .exclude(lessons__isnull=True)
         .distinct()
         .order_by('-created_at')
     )
+    if query:
+        courses = courses.filter(title__icontains=query) # фильтруем по названию
 
-    return render(request, 'courses/list.html', {'courses': courses})
+    return render(request, 'courses/list.html', {
+        'courses': courses,
+        'query': query,
+        })
 
 # related_name и get_absolute_url.
 def course_detail(request, pk):
@@ -31,27 +37,29 @@ def lesson_detail(request, pk):
 
 # Агрегация и аннотирование
 def stats_view(request):
-    from django.db.models import Avg, Count, Max
+    course_stats = Course.objects.values('title', 'level__name').annotate(
+        students_count=Count('usercourse')
+    )
+    course_names = Course.objects.values_list('title', flat=True)
 
-    # Средний балл по всем результатам
+    total_courses = Course.objects.count()
+    total_students = User.objects.filter(roles__name='student').count()
+
+    has_results = Result.objects.exists()
+
     avg_score = Result.objects.aggregate(avg=Avg('score'))
-
-    # Количество учеников на каждом курсе
-    courses = Course.objects.annotate(students_count=Count('usercourse'))
-
-    # Максимальный балл по каждому заданию
     best_scores = Result.objects.values('exercise__lesson__course__title') \
                                 .annotate(max_score=Max('score'))
-
-    # активные записи на курс
     now = timezone.now()
-    active_enrollments = UserCourse.objects.filter(
-        access_until__gt=now  #__gt = greater than (больше чем)
-    )
+    active_enrollments = UserCourse.objects.filter(access_until__gt=now)
 
     return render(request, 'courses/stats.html', {
+        'course_stats': course_stats,
+        'course_names': course_names,
+        'total_courses': total_courses,
+        'total_students': total_students,
+        'has_results': has_results,
         'avg_score': avg_score,
-        'courses': courses,
         'best_scores': best_scores,
         'active_enrollments': active_enrollments,
     })
@@ -69,10 +77,13 @@ def course_create(request):
 
 def course_edit(request, pk):
     course = get_object_or_404(Course, pk=pk)
+    old_level = course.level_id
     if request.method == 'POST':
         form = CourseForm(request.POST, request.FILES, instance=course)
         if form.is_valid():
             form.save()
+            if course.level_id != old_level:
+                UserCourse.objects.filter(course=course).update(progress=0.0)
             messages.success(request, f'Курс "{course.title}" обновлён!')
             return redirect(course.get_absolute_url())
     else:

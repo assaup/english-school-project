@@ -104,6 +104,10 @@ class Course(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Создан"))
     objects = models.Manager() 
     published = PublishedCourseManager()
+    video_url = models.URLField(
+        blank=True,
+        verbose_name=_("Ссылка на видео")
+    )
 
     def get_absolute_url(self):
         return reverse('course_detail', args=[self.pk]) #результат: '/courses/5/'

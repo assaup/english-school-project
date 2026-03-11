@@ -3,12 +3,22 @@
 <body>
     <h1>Статистика</h1>
 
-    <h2>Средний балл по всем заданиям</h2>
+    <h2>Общая информация</h2>
+    <p>Всего курсов: {{ total_courses }}</p>
+    <p>Всего учеников: {{ total_students }}</p>
+    <p>Есть результаты: {{ has_results }}</p>
+
+    <h2>Средний балл</h2>
     <p>{{ avg_score.avg|default:"нет данных" }}</p>
 
-    <h2>Курсы и количество учеников</h2>
-    {% for course in courses %}
-        <p>{{ course.title }} — учеников: {{ course.students_count }}</p>
+    <h2>Курсы и ученики</h2>
+    {% for item in course_stats %}
+        <p>{{ item.title }} ({{ item.level__name }}) — учеников: {{ item.students_count }}</p>
+    {% endfor %}
+
+    <h2>Все курсы</h2>
+    {% for name in course_names %}
+        <p>{{ name }}</p>
     {% endfor %}
 
     <h2>Лучший балл по курсам</h2>
