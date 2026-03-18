@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
+        input { padding: 8px; width: 300px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 8px 16px; background: #4a90e2; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .course-card { border: 1px solid #e0e0e0; border-radius: 6px; padding: 16px; margin: 10px 0; }
+        .course-card h3 a { color: #4a90e2; text-decoration: none; }
+        .level-badge { display: inline-block; background: #f0f4ff; padding: 2px 10px; border-radius: 12px; font-size: 14px; }
+    </style>
+</head>
 <body>
-    <h1>Курсы уровня A1</h1>
+    <h1>Курсы</h1>
     <form method="get">
         <input type="text" name="q" value="{{ query }}" placeholder="Поиск курса...">
         <button type="submit">Найти</button>
     </form>
 
     {% for course in courses %}
-        <p>
-            <a href="{{ course.get_absolute_url }}">{{ course.title }}</a>
-            — {{ course.level }}
-        </p>
+        <div class="course-card">
+            <h3><a href="{{ course.get_absolute_url }}">{{ course.title }}</a></h3>
+            <p>Уровень: <span class="level-badge">{{ course.level.name }}</span></p>
+            <p style="color: #666; font-size: 14px;">{{ course.level.description }}</p>
+        </div>
     {% empty %}
         <p>Курсов не найдено</p>
     {% endfor %}

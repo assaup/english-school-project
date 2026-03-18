@@ -1,19 +1,18 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.db.models import Prefetch
 from django.db.models import Avg, Count, Max
 from django.contrib import messages
 from .forms import CourseForm
-from .models import Course, Lesson, Result, UserCourse, User
+from .models import Course, Lesson, Result, UserCourse, User, Exercise
 
 # Пример filter(), order_by(), __ для обращения к связанной таблице
 def course_list(request):
     query = request.GET.get('q', '')
     courses = (
-        Course.objects
+        Course.published
         .select_related('level')
         # .filter(level__name='A1')
-        # .exclude(lessons__isnull=True)
-        .distinct()
         .order_by('-created_at')
     )
     if query:
@@ -24,12 +23,48 @@ def course_list(request):
         'query': query,
         })
 
-# related_name и get_absolute_url.
+# # related_name и get_absolute_url.
 def course_detail(request, pk):
-    course = get_object_or_404(Course.objects.select_related('level').prefetch_related('lessons', 'teachers'), pk=pk)
-    lessons = course.lessons.all() #уже в кэше
+    course = get_object_or_404(
+        Course.objects
+            .select_related('level')
+            .prefetch_related(
+                'teachers',
+                'teachers__level',
+                Prefetch(
+                    'lessons',
+                    queryset=Lesson.objects.prefetch_related(
+                        Prefetch(
+                            'exercises',
+                            queryset=Exercise.objects.select_related('exercise_type')
+                        )
+                    )
+                ),
+            ),
+        pk=pk
+    )
+    lessons = course.lessons.all()
     teachers = course.teachers.all()
-    return render(request, 'courses/detail.html', {'course': course, 'lessons': lessons, 'teachers': teachers})
+
+    return render(request, 'courses/detail.html', {
+        'course': course,
+        'lessons': lessons,
+        'teachers': teachers,
+    })
+
+# # без selected_related
+def course_detail(request, pk):
+    course = get_object_or_404(Course, pk=pk)
+
+    lessons = course.lessons.all()
+    teachers = course.teachers.all()
+
+    return render(request, 'courses/detail.html', {
+        'course': course,
+        'lessons': lessons,
+        'teachers': teachers
+    })
+
 
 def lesson_detail(request, pk):
     lesson = get_object_or_404(Lesson.objects.select_related('course').prefetch_related('exercises'),  pk=pk)
@@ -37,6 +72,7 @@ def lesson_detail(request, pk):
 
 # Агрегация и аннотирование
 def stats_view(request):
+    # количество учеников на каждом курсе
     course_stats = Course.objects.values('title', 'level__name').annotate(
         students_count=Count('usercourse')
     )
@@ -48,6 +84,7 @@ def stats_view(request):
     has_results = Result.objects.exists()
 
     avg_score = Result.objects.aggregate(avg=Avg('score'))
+    # максимальный балл по курсам
     best_scores = Result.objects.values('exercise__lesson__course__title') \
                                 .annotate(max_score=Max('score'))
     now = timezone.now()

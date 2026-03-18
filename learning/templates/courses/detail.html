@@ -1,14 +1,52 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
+        h1 { border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; }
+        .level-badge { display: inline-block; background: #f0f4ff; padding: 2px 10px; border-radius: 12px; font-size: 14px; }
+        .btn { display: inline-block; padding: 6px 14px; border-radius: 4px; text-decoration: none; font-size: 14px; margin-right: 8px; }
+        .btn-edit { background: #4a90e2; color: white; }
+        .btn-delete { background: #e25555; color: white; }
+        .teacher-card { border: 1px solid #c5d8f7; border-radius: 6px; padding: 12px; margin: 8px 0; background: #f5f9ff; }
+        .lesson-card { border: 1px solid #b8e0c0; border-radius: 6px; padding: 12px; margin: 8px 0; background: #f5fff8; }
+        .exercise-card { border: 1px solid #ffd9a0; border-radius: 6px; padding: 10px; margin: 6px 0; background: #fffbf2; font-size: 14px; }
+        .meta { color: #666; font-size: 14px; }
+    </style>
+</head>
 <body>
     <h1>{{ course.title }}</h1>
-    <p>Уровень: {{ course.level }}</p>
-    <a href="{% url 'course_edit' course.pk %}">Редактировать</a>
-    <a href="{% url 'course_delete' course.pk %}">Удалить</a>
+    <p>Уровень: <span class="level-badge">{{ course.level.name }}</span></p>
+    <p class="meta">{{ course.level.description }}</p>
+
+    <a href="{% url 'course_edit' course.pk %}" class="btn btn-edit">Редактировать</a>
+    <a href="{% url 'course_delete' course.pk %}" class="btn btn-delete">Удалить</a>
+
+    <h2>Преподаватели</h2>
+    {% for teacher in teachers %}
+        <div class="teacher-card">
+            <p><strong>{{ teacher.get_full_name }}</strong> · {{ teacher.username }}</p>
+            <p class="meta">Уровень: <span class="level-badge">{{ teacher.level.name }}</span> — {{ teacher.level.description }}</p>
+        </div>
+    {% empty %}
+        <p class="meta">Преподавателей нет</p>
+    {% endfor %}
 
     <h2>Уроки</h2>
     {% for lesson in lessons %}
-        <p>{{ lesson.order }}. {{ lesson.title }}</p>
+        <div class="lesson-card">
+            <p><strong>{{ lesson.order }}. {{ lesson.title }}</strong></p>
+            <p class="meta">{{ lesson.description }}</p>
+
+            {% for exercise in lesson.exercises.all %}
+                <div class="exercise-card">
+                    <p><strong>{{ exercise.order }}. {{ exercise.question }}</strong></p>
+                    <p class="meta">Тип: {{ exercise.exercise_type.name }} · Ответ: {{ exercise.correct_answer }}</p>
+                </div>
+            {% empty %}
+                <p class="meta">Заданий нет</p>
+            {% endfor %}
+        </div>
     {% endfor %}
 </body>
 </html>

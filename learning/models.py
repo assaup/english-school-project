@@ -178,7 +178,8 @@ class UserCourse(models.Model):
     enrolled_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Дата записи"))
     progress = models.FloatField(default=0.0, verbose_name=_("Прогресс (%)"))
     access_until = models.DateTimeField(null = True, blank=True, verbose_name=_("Доступ до"))
-
+    
+    #доступ
     def is_access_expired(self):
         if self.access_until is None:
             return False
