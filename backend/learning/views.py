@@ -53,17 +53,17 @@ def course_detail(request, pk):
     })
 
 # # без selected_related
-def course_detail(request, pk):
-    course = get_object_or_404(Course, pk=pk)
+# def course_detail(request, pk):
+#     course = get_object_or_404(Course, pk=pk)
 
-    lessons = course.lessons.all()
-    teachers = course.teachers.all()
+#     lessons = course.lessons.all()
+#     teachers = course.teachers.all()
 
-    return render(request, 'courses/detail.html', {
-        'course': course,
-        'lessons': lessons,
-        'teachers': teachers
-    })
+#     return render(request, 'courses/detail.html', {
+#         'course': course,
+#         'lessons': lessons,
+#         'teachers': teachers
+#     })
 
 
 def lesson_detail(request, pk):
