@@ -56,3 +56,4 @@ export function AuthProvider({ children }: Props) {
         </AuthContext.Provider>
     )
 }
+

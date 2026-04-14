@@ -17,7 +17,7 @@ api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 })
 
 api.interceptors.response.use(
-    response => response,
+    response => response, // status 200, успех
     async (error: AxiosError) => {
         const original = error.config as InternalAxiosRequestConfig & { _retry?: boolean }
         
@@ -29,6 +29,7 @@ api.interceptors.response.use(
                 if (!refresh) throw new Error('No refresh token')
 
                 const { data } = await axios.post<AuthTokens>('/api/auth/refresh/', { refresh })
+
                 localStorage.setItem('access', data.access)
                 original.headers.Authorization = `Bearer ${data.access}`
 
@@ -45,3 +46,4 @@ api.interceptors.response.use(
 
 
 export default api
+
