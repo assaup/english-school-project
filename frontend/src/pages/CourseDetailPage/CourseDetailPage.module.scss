@@ -1,0 +1,132 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.courseDetailPage {
+    padding: $spacing-xl 0;
+}
+
+.header {
+    margin-bottom: $spacing-xl;
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    color: $text-secondary;
+    font-size: $font-size-base;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+.content {
+    @include card;
+}
+
+.title {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+}
+
+.instructor {
+    font-size: $font-size-lg;
+    color: $text-secondary;
+    margin-bottom: $spacing-lg;
+}
+
+.description {
+    font-size: $font-size-base;
+    color: $text-primary;
+    line-height: 1.6;
+    margin-bottom: $spacing-xl;
+    padding-bottom: $spacing-xl;
+    border-bottom: 1px solid $border-color;
+}
+
+.lessonsSection {
+    margin-top: $spacing-xl;
+}
+
+.lessonsTitle {
+    font-size: $font-size-xl;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: $spacing-lg;
+}
+
+.noLessons {
+    color: $text-secondary;
+    font-style: italic;
+}
+
+.lessonsList {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+}
+
+.lessonItem {
+    @include flex-between;
+    padding: $spacing-md;
+    background-color: $background-color;
+    border-radius: $border-radius-md;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: darken($background-color, 3%);
+    }
+}
+
+.lessonNumber {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: $primary-color;
+    color: white;
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: $font-size-sm;
+    margin-right: $spacing-md;
+}
+
+.lessonInfo {
+    flex-grow: 1;
+    margin-left: $spacing-md;
+}
+
+.lessonTitle {
+    font-size: $font-size-base;
+    font-weight: 500;
+    color: $text-primary;
+}
+
+.viewButton {
+    @include button;
+    background-color: transparent;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-sm;
+
+    &:hover {
+        background-color: $primary-color;
+        color: white;
+    }
+}
+
+.loading,
+.error {
+    @include flex-center;
+    min-height: 300px;
+    font-size: $font-size-lg;
+}
+
+.error {
+    color: $error-color;
+}

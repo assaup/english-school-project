@@ -1,0 +1,85 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.dashboardPage {
+    padding: $spacing-xl 0;
+}
+
+.header {
+    @include flex-between;
+    margin-bottom: $spacing-xl;
+}
+
+.title {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $text-primary;
+}
+
+.logoutButton {
+    @include button;
+    background-color: transparent;
+    color: $error-color;
+    border: 1px solid $error-color;
+    padding: $spacing-sm $spacing-lg;
+
+    &:hover {
+        background-color: $error-color;
+        color: white;
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+}
+
+.welcomeCard {
+    @include card;
+    text-align: center;
+}
+
+.welcomeTitle {
+    font-size: $font-size-xl;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+}
+
+.email {
+    font-size: $font-size-base;
+    color: $text-secondary;
+}
+
+.cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: $spacing-lg;
+}
+
+.card {
+    @include card;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: $shadow-lg;
+    }
+}
+
+.cardTitle {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $primary-color;
+    margin-bottom: $spacing-sm;
+}
+
+.cardDescription {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    line-height: 1.5;
+}

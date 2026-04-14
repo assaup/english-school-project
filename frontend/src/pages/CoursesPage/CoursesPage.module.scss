@@ -1,0 +1,86 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.coursesPage {
+    padding: $spacing-xl 0;
+}
+
+.header {
+    @include flex-between;
+    margin-bottom: $spacing-xl;
+}
+
+.title {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $text-primary;
+}
+
+.newCourseButton {
+    @include button;
+    background-color: $primary-color;
+    color: white;
+    padding: $spacing-sm $spacing-lg;
+
+    &:hover {
+        background-color: $primary-hover;
+    }
+}
+
+.loading,
+.error,
+.empty {
+    @include flex-center;
+    min-height: 300px;
+    font-size: $font-size-lg;
+    color: $text-secondary;
+}
+
+.error {
+    color: $error-color;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: $spacing-lg;
+}
+
+.card {
+    @include card;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: $shadow-lg;
+    }
+}
+
+.cardTitle {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+}
+
+.description {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    flex-grow: 1;
+    margin-bottom: $spacing-md;
+    line-height: 1.6;
+}
+
+.footer {
+    @include flex-between;
+    padding-top: $spacing-md;
+    border-top: 1px solid $border-color;
+}
+
+.instructor {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+}
