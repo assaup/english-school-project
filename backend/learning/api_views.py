@@ -3,11 +3,14 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.db.models import Avg, Count, Max
+from rest_framework.permissions import AllowAny
+from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Course, Lesson, Result, UserCourse
 from .serializers import (
     CourseListSerializer, CourseDetailSerializer,
     LessonSerializer, ResultSerializer,
-    UserSerializer, UserCourseSerializer
+    UserSerializer, UserCourseSerializer,
+    RegisterSerializer
 )
 
 
@@ -61,3 +64,17 @@ def stats_view(request):
         'avg_score': round(avg_score, 1) if avg_score else None,
         'course_stats': course_stats,
     })
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def register_view(request):
+    serializer = RegisterSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    user = serializer.save()
+
+    refresh = RefreshToken.for_user(user)
+    return Response({
+        'access': str(refresh.access_token),
+        'refresh': str(refresh),
+    }, status=201)

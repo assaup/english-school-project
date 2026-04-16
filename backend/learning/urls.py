@@ -17,6 +17,7 @@ urlpatterns = [
     path('api/me/', api_views.me_view, name='api_me'),
     path('api/my-courses/', api_views.my_courses_view, name='api_my_courses'),
     path('api/stats/', api_views.stats_view, name='api_stats'),
+    path('api/auth/register/', api_views.register_view, name='api_register'),
 
     # JWT
     path('api/auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

@@ -19,6 +19,7 @@ export function AuthProvider({ children }: Props) {
 
                 if (!token) {
                     setUser(null)
+                    setLoading(false)
                     return
                 }
 
@@ -44,6 +45,21 @@ export function AuthProvider({ children }: Props) {
         setUser(me.data)
     }
 
+    const register = async (username: string, email: string, password: string, passwordConfirm: string) => {
+        const { data } = await api.post('/auth/register/', {
+            username, 
+            email, 
+            password,
+            password_confirm: passwordConfirm
+        })
+
+        localStorage.setItem('access', data.access);
+        localStorage.setItem('refresh', data.refresh);
+
+        const me = await api.get<User>('/me/');
+        setUser(me.data);
+    }
+
     const logout = () => {
         localStorage.removeItem('access')
         localStorage.removeItem('refresh')
@@ -51,7 +67,7 @@ export function AuthProvider({ children }: Props) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, loading }}>
+        <AuthContext.Provider value={{ user, login, register, logout, loading }}>
             {children}
         </AuthContext.Provider>
     )
