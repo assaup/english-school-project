@@ -1,0 +1,218 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.section {
+    padding: 70px 0;
+
+    &_accent{
+        background: var(--color-accent);
+        color: var(--color-white);
+    }
+
+    &__title{
+        font-size: 5rem;
+        margin-bottom: 2rem;
+    }
+    &__text{
+        font-size: 2.4rem;
+        margin-bottom: 5rem;
+    }
+}
+.wrapper{
+    display: flex;
+    margin-bottom: 1rem;
+}
+.contentWrapper{
+    max-width: 40%;
+}
+.listWrapper{
+    margin-bottom: 2rem;
+}
+.info{
+    display: inline-flex;
+    gap: .5rem;
+    background-color: var(--color-white);
+    color: var(--color-accent);
+    border-radius: var(--border-radius-card);
+    padding: .6rem;
+    margin-right: 0.8rem;
+    &_accent{
+        color: var(--color-white);
+        background-color: hsla(0, 0%, 100%, .05);
+    }
+
+
+}
+.titleFirst{
+    font-size: 7rem;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+}
+.text{
+    font-size: 2.4rem;
+    margin-bottom: 4rem;
+}
+.img{
+    position: absolute;
+    height: 77%;
+    left: 50%;
+    top: 10rem;
+    object-fit: cover;
+    object-position: center;
+}
+.recruiter{
+    text-align: end;
+    margin-right: 20rem;
+}
+
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 2rem;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-gray-bg);
+    padding: 4rem;
+    border-radius: var(--border-radius-card);
+    &__img{
+        width: 64px;
+        height: 64px;
+        margin-bottom: 2rem;
+    }
+    &__title{
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
+    &__text{
+        font-size: 2rem;
+        color: var(--color-gray);
+    }
+
+}
+.showMoreWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+}
+.btnShowMore{
+    background-color: var(--color-accent);
+}
+
+
+// Поиск
+.search {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+    &__input{
+        width: 40%;
+        padding: 1rem 1.6rem;
+        border: 2px solid var(--color-gray);
+        outline: none;
+
+        &:focus { border-color: var(--color-accent); }
+        }
+    &__btn{
+        background-color: var(--color-accent) !important;
+    }
+}
+
+
+// Курсы
+.courseGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+.classroom{
+    display: flex;
+    gap: 7rem;
+    &__image_box{
+        width: 70%;
+        border-radius: var(--border-radius-card);
+        overflow: hidden;
+        border: 8px solid var(--color-dark)
+    }
+    &__features{
+        align-content: center;
+    }
+}
+.feature {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    &__icon_wrapper{
+        width: 20%;
+    }
+    &__info{
+        padding-top: .7rem;
+    }
+    &__title{
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
+}
+
+
+// Преподаватели
+.teacherGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+// Статистика
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 2rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 4rem 2rem;
+    border-radius: var(--border-radius-card);
+    background-color: hsla(0, 0%, 100%, .08);
+    text-align: center;
+    transition: .3s;
+
+    &__number {
+        font-size: 6rem;
+        font-weight: 700;
+        color: var(--color-white);
+        line-height: 1;
+    }
+
+    &__label {
+        font-size: 2rem;
+    }
+
+    &:hover{
+        transform: translateY(-5px);
+    }
+}
+// Утилиты
+.loading, .empty {
+    color: #888;
+    font-size: 1rem;
+    padding: 20px 0;
+}
+
+.error {
+    color: #e94560;
+    font-size: 1rem;
+    padding: 20px 0;
+}

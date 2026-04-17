@@ -1,0 +1,78 @@
+.slider {
+    position: relative;
+    padding: 0 56px;
+}
+.card_container{
+    overflow-x: hidden;
+}
+.track {
+    overflow: hidden;
+}
+
+.inner {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide {
+    flex: 0 0 calc((100% - 40px) / 3); // (100% - gap*2) / visible
+    min-width: 0;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 2px solid #e0e0e0;
+    background: white;
+    cursor: pointer;
+    font-size: 2rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+
+    &:hover:not(:disabled) {
+        border-color: var(--color-accent);
+        color:var(--color-accent);
+    }
+
+    &:disabled {
+        opacity: 0.3;
+        cursor: default;
+    }
+}
+
+.arrowLeft { left: 0; }
+.arrowRight { right: 0; }
+
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: #ddd;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.2s;
+
+    &:hover { background: var(--color-accent); }
+}
+
+.dotActive {
+    background: var(--color-accent);
+    width: 24px;
+    border-radius: 4px;
+}

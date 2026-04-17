@@ -1,0 +1,28 @@
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--input-height);
+  padding: 12px;
+  color: var(--color-white);
+  background-color: var(--color-dark);
+  border: none;
+  padding: 18px 38px;
+  text-transform: uppercase;
+  font-weight: 500;
+  box-shadow: 0 16px 16px rgba(8, 6, 28, .3);
+
+  &:not(:disabled){
+    &:hover {
+      box-shadow: none;
+    }
+
+    &:active {
+      scale: 1.05;
+    }
+  }
+  
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

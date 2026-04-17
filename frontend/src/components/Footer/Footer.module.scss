@@ -1,0 +1,99 @@
+.footer {
+    background: var(--color-dark);
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: auto;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 24px 3rem;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
+}
+
+.brand {
+    max-width: 32rem;
+
+    p {
+        margin: 1.2rem 0 0;
+        font-size: 1.6rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.5);
+    }
+}
+
+.logo {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--color-white);
+    letter-spacing: 0.05em;
+}
+
+.nav {
+    display: flex;
+    gap: 6rem;
+}
+
+.navCol {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    h4 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--color-white);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.8rem;
+    }
+
+    a {
+        font-size: 1.6rem;
+        color: rgba(255, 255, 255, 0.55);
+        text-decoration: none;
+        transition: color var(--transition-duration);
+
+        &:hover {
+            color: var(--color-accent);
+        }
+    }
+}
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 3rem;
+    flex-wrap: wrap;
+    gap: 1.6rem;
+
+    p {
+        font-size: 1.4rem;
+        color: rgba(255, 255, 255, 0.35);
+    }
+}
+
+.bottomLinks {
+    display: flex;
+    gap: 2.4rem;
+
+    a {
+        font-size: 1.4rem;
+        color: rgba(255, 255, 255, 0.35);
+        text-decoration: underline;
+        transition: color var(--transition-duration);
+
+        &:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+    }
+}

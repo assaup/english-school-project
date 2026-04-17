@@ -41,6 +41,7 @@ export interface Course {
     level: Level | null
     lessons_count?: number
     teachers_count?: number
+    students_count?: number
     lessons?: Lesson[]
     teachers?: User[]
     cover: string | null
@@ -86,4 +87,29 @@ export interface PaginatedResponse<T>{
     next: string | null
     previous: string | null
     results: T[]
+}
+
+
+export interface Teacher {
+    id: number
+    username: string
+    first_name: string
+    last_name: string
+    level: Level | null
+    courses_count: number
+}
+
+export interface HomeStats {
+    total_courses: number
+    total_lessons: number
+    total_students: number
+    avg_score: number | null
+    top_level: string | null
+}
+
+export interface HomeData {
+    courses: Course[]
+    query: string
+    teachers: Teacher[]
+    stats: HomeStats
 }

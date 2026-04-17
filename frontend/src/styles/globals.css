@@ -1,0 +1,18 @@
+html {
+  font-size: 62.5%;
+}
+html, body {
+  overflow-x: hidden;
+}
+
+input,
+label,
+button {
+  transition-duration: var(--transition-duration);
+}
+
+:focus-visible {
+  outline: 2px dashed var(--color-black);
+  outline-offset: 4px;
+  transition-duration: 0s !important;
+}

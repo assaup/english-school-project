@@ -1,0 +1,13 @@
+:root {
+  --color-white: rgb(255, 255, 255);
+
+  --color-gray: rgb(112, 110, 136);
+  --color-gray-bg: #f5f5f8;
+  --color-dark: rgb(50, 47, 85);
+  --color-accent: rgb(141, 112, 255);
+
+
+  --border-radius-card: 20px;
+
+  --transition-duration: 0.2s;
+}

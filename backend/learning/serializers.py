@@ -39,10 +39,12 @@ class CourseListSerializer(serializers.ModelSerializer):
     level = LevelSerializer(read_only=True)
     lessons_count = serializers.IntegerField(source='lessons.count', read_only=True)
     teachers_count = serializers.IntegerField(source='teachers.count', read_only=True)
+    students_count = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Course
-        fields = ['id', 'title', 'description', 'level', 'lessons_count', 'teachers_count', 'cover', 'video_url', 'created_at']
+        fields = ['id', 'title', 'description', 'level', 'lessons_count', 
+                  'teachers_count', 'students_count', 'cover', 'video_url', 'created_at']
 
 
 class CourseDetailSerializer(serializers.ModelSerializer):
@@ -88,3 +90,12 @@ class RegisterSerializer(serializers.ModelSerializer):
         validated_data.pop('password_confirm')
         user = User.objects.create_user(**validated_data)
         return user
+    
+
+class TeacherSerializer(serializers.ModelSerializer):
+    level = LevelSerializer(read_only=True)
+    courses_count = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'first_name', 'last_name', 'level', 'courses_count']

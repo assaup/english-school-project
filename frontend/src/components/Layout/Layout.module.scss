@@ -1,0 +1,13 @@
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    font-family: 'Roboto';
+    color: var(--color-dark);
+    font-size: 1.6rem;
+}
+
+.content {
+    flex: 1;
+}
