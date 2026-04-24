@@ -1,0 +1,125 @@
+.page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background: var(--color-gray-bg);
+}
+
+.card {
+    background: var(--color-white);
+    border-radius: var(--border-radius-card);
+    padding: 5rem;
+    width: 100%;
+    max-width: 520px;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+    margin-bottom: 3.5rem;
+    text-align: center;
+}
+
+.title {
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.8rem;
+    color: var(--color-gray);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    margin-bottom: 2.4rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.label {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.input {
+    padding: 1.4rem 1.6rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1.6rem;
+    color: var(--color-dark);
+    outline: none;
+    transition: border-color var(--transition-duration);
+    background: var(--color-white);
+
+    &::placeholder {
+        color: #bbb;
+    }
+
+    &:focus {
+        border-color: var(--color-accent);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+.btn {
+    width: 100%;
+    padding: 1.6rem;
+    background: var(--color-accent);
+    color: var(--color-white);
+    border: none;
+    border-radius: 12px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity var(--transition-duration);
+    margin-top: 0.8rem;
+
+    &:hover:not(:disabled) {
+        opacity: 0.88;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.error {
+    background: rgba(233, 69, 96, 0.08);
+    color: #e94560;
+    border-radius: 10px;
+    padding: 1.2rem 1.6rem;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.footer {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--color-gray);
+}
+
+.link {
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

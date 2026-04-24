@@ -1,6 +1,7 @@
 import { useState} from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../context/useAuth'
+import styles from './LoginPage.module.scss'
 
 
 const LoginPage = () => {
@@ -29,50 +30,54 @@ const LoginPage = () => {
     }
 
     return (
-        <div className="loginPage">
-            <h1>Вход в систему</h1>
-            <form onSubmit={handleSubmit}>
-                {isLoading && (
-                    <p>Загрузка...</p>
+        <div className={styles.page}>
+            <div className={styles.card}>
+                <div className={styles.header}>
+                    <h1 className={styles.title}>Вход в систему</h1>
+                    <p className={styles.subtitle}>Рады видеть вас снова</p>
+                </div>
 
-                )}
-                {error && (
-                    <p>Ошибка: {error}</p>
-                )}
+                {error && <p className={styles.error}>⚠ {error}</p>}
 
-                <label>
-                    Имя пользователя
-                    <input 
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        className=''
-                        placeholder='Введите имя пользователя'
-                        required
-                        disabled={isLoading}
-                    />
-                </label>
-                <label>
-                    Пароль
-                    <input 
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className=''
-                        placeholder='Введите пароль'
-                        required
-                        disabled={isLoading}
-                    />
-                </label>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <label className={styles.field}>
+                        <span className={styles.label}>Имя пользователя</span>
+                        <input
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            placeholder="Введите имя пользователя"
+                            className={styles.input}
+                            required
+                            disabled={isLoading}
+                        />
+                    </label>
 
-                <button type='submit' className='' disabled={isLoading}>
-                    {isLoading ? 'Вход...' : 'Войти'}
-                </button>
+                    <label className={styles.field}>
+                        <span className={styles.label}>Пароль</span>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Введите пароль"
+                            className={styles.input}
+                            required
+                            disabled={isLoading}
+                        />
+                    </label>
 
-                <p>
-                    Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>
+                    <button type="submit" className={styles.btn} disabled={isLoading}>
+                        {isLoading ? 'Вход...' : 'Войти'}
+                    </button>
+                </form>
+
+                <p className={styles.footer}>
+                    Нет аккаунта?{' '}
+                    <Link to="/register" className={styles.link}>
+                        Зарегистрироваться
+                    </Link>
                 </p>
-            </form>
+            </div>
         </div>
     )
 }

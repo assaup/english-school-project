@@ -1,6 +1,7 @@
 import { useState} from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../context/useAuth'
+import styles from './RegisterPage.module.scss'
 
 
 const RegisterPage = () => {
@@ -60,74 +61,82 @@ const RegisterPage = () => {
     }
 
     return (
-        <div className="loginPage">
-            <h1>Регистрация</h1>
-            <form onSubmit={handleSubmit}>
-                {isLoading && <p>Загрузка...</p>}
-                {error && <p>Ошибка: {error}</p>}
+        <div className={styles.page}>
+            <div className={styles.card}>
+                <div className={styles.header}>
+                    <h1 className={styles.title}>Регистрация</h1>
+                    <p className={styles.subtitle}>Создайте аккаунт и начните учиться</p>
+                </div>
 
-                <label>
-                    Имя пользователя
-                    <input 
-                        type="text"
-                        name='username'
-                        value={formData.username}
-                        onChange={handleChange}
-                        className=''
-                        placeholder='Введите имя пользователя'
-                        required
-                        disabled={isLoading}
-                    />
-                </label>
+                {error && <p className={styles.error}>⚠ {error}</p>}
 
-                <label>
-                    Email
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="Введите ваш email"
-                        required
-                        disabled={isLoading}
-                    />
-                </label>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <label className={styles.field}>
+                        <span className={styles.label}>Имя пользователя</span>
+                        <input
+                            type="text"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            placeholder="Введите имя пользователя"
+                            className={styles.input}
+                            required
+                            disabled={isLoading}
+                        />
+                    </label>
 
-                <label>
-                    Пароль
-                    <input 
-                        type="password"
-                        name='password'
-                        value={formData.password}
-                        onChange={handleChange}
-                        className=''
-                        placeholder='Придумайте пароль'
-                        required
-                        disabled={isLoading}
-                    />
-                </label>
+                    <label className={styles.field}>
+                        <span className={styles.label}>Email</span>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="Введите ваш email"
+                            className={styles.input}
+                            required
+                            disabled={isLoading}
+                        />
+                    </label>
 
-                <label>
-                    Подтверждение пароля
-                    <input
-                        type="password"
-                        name="passwordConfirm"
-                        value={formData.passwordConfirm}
-                        onChange={handleChange}
-                        placeholder="Повторите пароль"
-                        required
-                        disabled={isLoading}
-                    />
-                </label>
+                    <label className={styles.field}>
+                        <span className={styles.label}>Пароль</span>
+                        <input
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            placeholder="Придумайте пароль"
+                            className={styles.input}
+                            required
+                            disabled={isLoading}
+                        />
+                    </label>
 
-                <button type='submit' className='' disabled={isLoading}>
-                    {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
-                </button>
+                    <label className={styles.field}>
+                        <span className={styles.label}>Подтверждение пароля</span>
+                        <input
+                            type="password"
+                            name="passwordConfirm"
+                            value={formData.passwordConfirm}
+                            onChange={handleChange}
+                            placeholder="Повторите пароль"
+                            className={styles.input}
+                            required
+                            disabled={isLoading}
+                        />
+                    </label>
 
-                <p>
-                    Уже есть аккаунт? <Link to="/login">Войти</Link>
+                    <button type="submit" className={styles.btn} disabled={isLoading}>
+                        {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
+                    </button>
+                </form>
+
+                <p className={styles.footer}>
+                    Уже есть аккаунт?{' '}
+                    <Link to="/login" className={styles.link}>Войти</Link>
                 </p>
-            </form>
+            </div>
         </div>
     )
 }
