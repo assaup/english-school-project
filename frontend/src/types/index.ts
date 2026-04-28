@@ -96,7 +96,7 @@ export interface Teacher {
     first_name: string
     last_name: string
     level: Level | null
-    courses_count: number
+    courses_count?: number
 }
 
 export interface HomeStats {
@@ -112,4 +112,35 @@ export interface HomeData {
     query: string
     teachers: Teacher[]
     stats: HomeStats
+}
+
+export interface CourseDetail extends Course {
+    lessons: Lesson[]
+    teachers: User[]
+}
+
+export interface LessonWrite {
+    id: number
+    title: string
+    description: string
+    order: number
+}
+
+export interface UserShort {
+    id: number
+    username: string
+    display: string
+    role: 'teacher' | 'student' | 'admin' | null
+}
+
+export interface Enrollment {
+    id: number
+    user: number
+    user_display: string
+    teacher: number | null
+    teacher_display: string | null
+    progress: number
+    status: 'pending' | 'active' | 'finished'
+    enrolled_at: string
+    access_until: string | null
 }

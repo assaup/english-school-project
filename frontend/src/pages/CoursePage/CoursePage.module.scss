@@ -1,0 +1,240 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  font-size: 2rem;
+  color: var(--color-gray);
+}
+
+// Hero
+.info {
+  display: inline-flex;
+  gap: 0.5rem;
+  background-color: var(--color-gray-bg);
+  border-radius: var(--border-radius-card);
+  padding: 0.6rem;
+  margin-right: 0.8rem;
+}
+.hero {
+  padding-block: 6rem;
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.heroMeta {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.badge {
+  background: var(--color-accent);
+  color: var(--color-white);
+  padding: 0.4rem 1.2rem;
+  border-radius: 20px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.title {
+  font-size: 4.8rem;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+.description {
+  font-size: 2.4rem;
+  opacity: 0.75;
+  margin-bottom: 3rem;
+  max-width: 60rem;
+}
+
+.stats {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.6rem;
+  opacity: 0.85;
+}
+
+.actions {
+  display: flex;
+  gap: 1.2rem;
+}
+
+
+
+.heroCover {
+  width: 32rem;
+  height: 24rem;
+  border-radius: var(--border-radius-card);
+  overflow: hidden;
+  transition: transform var(--transition-duration);
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &:hover {
+    transform: scale(1.03);
+  }
+
+}
+
+// Body
+
+.section {
+  padding: 70px 0;
+  &__title {
+    font-size: 5rem;
+    margin-bottom: 2rem;
+  }
+  &__text {
+    font-size: 2.4rem;
+    margin-bottom: 5rem;
+  }
+}
+.titleFirst {
+  font-size: 7rem;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+.sectionTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin-bottom: 2.4rem;
+}
+
+// Уроки
+.lessons {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-left: 3rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 1.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-gray-bg);
+  }
+}
+
+.lessonCard {
+  position: relative;
+  display: flex;
+  gap: 2rem;
+  background: var(--color-white);
+  padding: 2.4rem;
+  border-radius: var(--border-radius-card);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all var(--transition-duration);
+
+  &:hover {
+    transform: translateX(6px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.lessonNum {
+  position: absolute;
+  left: -3rem;
+  top: 2.4rem;
+
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.lessonTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 0.6rem;
+}
+
+.lessonDesc {
+  font-size: 1.5rem;
+  color: var(--color-gray);
+  margin-bottom: 0.8rem;
+}
+
+.exerciseBadge {
+  font-size: 1.3rem;
+  background: var(--color-gray-bg);
+  color: var(--color-gray);
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+}
+
+.empty {
+  color: var(--color-gray);
+  font-size: 1.6rem;
+}
+
+// Модалка
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalBox {
+  background: var(--color-white);
+  border-radius: var(--border-radius-card);
+  padding: 4rem;
+  max-width: 480px;
+  width: 90%;
+
+  &__title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 1.2rem;
+  }
+
+  p {
+    color: var(--color-gray);
+    margin-bottom: 3rem;
+  }
+}
+
+.modalActions {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: flex-end;
+}
+

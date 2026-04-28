@@ -1,0 +1,30 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    padding: 4rem;
+    background-color: var(--color-white);
+    gap: 2rem;
+    border-radius: 1.2rem;
+    width: 52rem;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+
+}
+.title{
+    font-size: 3rem;
+}
+.input{
+    width: 100%;
+    background-color: var(--color-white);
+    border: none;
+    padding: 1rem;
+    
+}
+.link{
+    display: inline-block;
+    color: inherit;
+    padding-inline: .5rem;
+}
+.agreement{
+    font-size: 1.2rem;
+}

@@ -1,25 +1,34 @@
 import type { ReactNode } from 'react'
 import styles from './Button.module.scss'
 
-type Button = {
+type ButtonProps = {
     className?: string
-    type: "button" | "submit" | "reset"
+    type?: "button" | "submit" | "reset"
     children: ReactNode
     onClick?: () => void
     isDisabled?: boolean
+    variant?: 'dark' | 'light'
 }
 
-const Button = (props: Button) => {
+const Button = (props: ButtonProps) => {
     const {
         className = '',
         type = 'button',
         children,
         onClick,
-        isDisabled
+        isDisabled,
+        variant = 'dark'
     } = props
+
+    const buttonClasses = `
+        ${styles.button}
+        ${variant === 'light' ? styles.button_light : ''}
+        ${className}
+    `.trim()
+
     return (
         <button
-            className={`${className} ${styles.button}`}
+            className={buttonClasses}
             type={type}
             onClick={onClick}
             disabled={isDisabled}

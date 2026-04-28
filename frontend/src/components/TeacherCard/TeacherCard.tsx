@@ -19,7 +19,8 @@ const TeacherCard = ({ teacher }: Props) => {
                 {teacher.level && (
                     <span className={styles.levelBadge}>Уровень: {teacher.level.name}</span>
                 )}
-                <p>Количество курсов: {teacher.courses_count}</p>
+                {teacher.courses_count ? <p>Количество курсов: {teacher.courses_count}</p> : ''}
+                
             </div>
         </div>
     )

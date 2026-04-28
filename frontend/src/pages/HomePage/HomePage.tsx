@@ -133,7 +133,7 @@ const HomePage = () => {
                             placeholder="Найти курс..."
                             className={styles.search__input}
                         />
-                        <Button type="submit" className={styles.search__btn}>Найти</Button>
+                        <Button type="submit" variant="light">Найти</Button>
                     </form>
 
                     {isLoading && <p className={styles.loading}>Загрузка...</p>}
@@ -156,7 +156,7 @@ const HomePage = () => {
                                     <Button
                                         type='button'
                                         onClick={handleShowMore}
-                                        className={styles.btnShowMore}
+                                        variant="light"
                                     >
                                         Показать ещё  ({data.courses.length - visibleCount} курсов)
                                     </Button>

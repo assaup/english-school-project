@@ -11,6 +11,9 @@
   text-transform: uppercase;
   font-weight: 500;
   box-shadow: 0 16px 16px rgba(8, 6, 28, .3);
+  &_light{
+      background-color: var(--color-accent);
+    }
 
   &:not(:disabled){
     &:hover {

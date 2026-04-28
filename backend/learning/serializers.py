@@ -99,3 +99,48 @@ class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name', 'last_name', 'level', 'courses_count']
+
+
+class CourseWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ['title', 'description', 'level', 'video_url', 'cover']
+
+
+class LessonWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lesson
+        fields = ['id', 'title', 'description', 'order']
+
+class UserCourseAdminSerializer(serializers.ModelSerializer):
+    user_display = serializers.SerializerMethodField(read_only=True)
+    teacher_display = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = UserCourse
+        fields = ['id', 'user', 'user_display', 'teacher', 'teacher_display',
+                  'progress', 'status', 'enrolled_at', 'access_until']
+        read_only_fields = ['enrolled_at']
+
+    def get_user_display(self, obj):
+        return obj.user.get_full_name() or obj.user.username
+
+    def get_teacher_display(self, obj):
+        if obj.teacher:
+            return obj.teacher.get_full_name() or obj.teacher.username
+        return None
+
+class UserShortSerializer(serializers.ModelSerializer):
+    display = serializers.SerializerMethodField()
+    role = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'display', 'role']
+
+    def get_display(self, obj):
+        return obj.get_full_name() or obj.username
+
+    def get_role(self, obj):
+        role = obj.roles.filter(name__in=['teacher', 'student']).first()
+        return role.name if role else None

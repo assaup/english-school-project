@@ -100,9 +100,6 @@
     justify-content: center;
     margin-top: 4rem;
 }
-.btnShowMore{
-    background-color: var(--color-accent);
-}
 
 
 // Поиск
@@ -118,9 +115,6 @@
         outline: none;
 
         &:focus { border-color: var(--color-accent); }
-        }
-    &__btn{
-        background-color: var(--color-accent) !important;
     }
 }
 
