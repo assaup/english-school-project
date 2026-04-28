@@ -98,17 +98,14 @@ def home_view(request):
         Course.published
         .select_related('level')
         .prefetch_related('teachers')
-        .annotate(
-            lessons_count=Count('lessons', distinct=True),
-            students_count=Count('usercourse', distinct=True)
-        )
+        .annotate(students_count=Count('usercourse', distinct=True))
         .order_by('-created_at')
     )
     if query:
         courses = courses.filter(title__icontains=query)
 
     # Секция 2 Преподаватели
-    teacher_role = Role.objects.filter(name='Преподаватель').first()
+    teacher_role = Role.objects.filter(name='teacher').first()
 
     if teacher_role:
         teachers = (
@@ -144,7 +141,7 @@ def home_view(request):
         .first()
     )
     top_level_name = top_level_data['level__name'] if top_level_data else None
-    
+
     return Response({
         'courses': CourseListSerializer(courses, many=True, context={'request': request}).data,
         'query': query,
@@ -300,7 +297,6 @@ def user_set_role_view(request, pk):
         return Response({'error': 'Допустимые роли: teacher, student'}, status=400)
 
     # убираем обе роли, назначаем одну
-    Role.objects.filter(name__in=['teacher', 'student']).exclude(name=role_name).values_list('id', flat=True)
     UserRole.objects.filter(user=user, role__name__in=['teacher', 'student']).delete()
     role = Role.objects.get(name=role_name)
     UserRole.objects.get_or_create(user=user, role=role)

@@ -21,7 +21,7 @@ const LoginPage = () => {
 
         try {
             await login(username, password)
-            navigate('/dashboard')
+            navigate('/')
         } catch {
             setError("Неверное имя пользователя или пароль")
         } finally {
