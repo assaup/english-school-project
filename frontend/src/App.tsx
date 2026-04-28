@@ -7,6 +7,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage"
 import CoursePage from "./pages/CoursePage/CoursePage"
 import CourseEditPage from "./pages/CourseEditPage/CourseEditPage"
 import UsersAdminPage from "./pages/UsersAdminPage/UsersAdminPage"
+import CoursesPage from './pages/CoursesPage/CoursesPage'
 import "./styles";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                         <Route path="/courses/:id/edit" element={<CourseEditPage />} />
                         <Route path="/courses/create" element={<CourseEditPage />} />
                         <Route path="/admin/users" element={<UsersAdminPage />} />
+                        <Route path="/courses" element={<CoursesPage />} />
                     </Routes>
                 </Layout>
             </AuthProvider>

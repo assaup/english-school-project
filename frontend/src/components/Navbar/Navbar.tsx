@@ -26,8 +26,8 @@ const Navbar = () => {
                         <option value="">Для компаний</option>
                         <option value="">Видеокурсы</option>
                     </select>
-                    <Link to="/" className={styles.navLink}>Преподаватели</Link>
-                    <Link to="/" className={styles.navLink}>Курсы</Link>
+                    <Link to="/admin/users" className={styles.navLink}>Преподаватели</Link>
+                    <Link to="/courses" className={styles.navLink}>Курсы</Link>
                     <Link to="/" className={styles.navLink}>Стоимость</Link>
                 </nav>
                 <div className={styles.buttons}>

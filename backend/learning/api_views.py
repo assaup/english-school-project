@@ -25,7 +25,12 @@ class CourseListView(generics.ListAPIView):
     ordering = ['-created_at']
 
     def get_queryset(self):
-        return Course.published.select_related('level').prefetch_related('teachers')
+        return (
+            Course.published
+            .select_related('level')
+            .prefetch_related('teachers')
+            .annotate(students_count=Count('usercourse', distinct=True))  # ← добавь
+        )
     
 
 class CourseDetailView(generics.RetrieveAPIView):
@@ -133,19 +138,12 @@ def home_view(request):
     top_level_data = (
         Course.objects
         .exclude(level=None)
-        .values('level__id', 'level__name')
+        .values('level__name')
         .annotate(count=Count('id'))
         .order_by('-count')
         .first()
     )
-    if top_level_data:
-        try: 
-            top_level = Level.objects.get(pk=top_level_data['level__id'])
-            top_level_name = top_level.name
-        except Level.DoesNotExist:
-            top_level_name = None
-    else: 
-        top_level_name = None
+    top_level_name = top_level_data['level__name'] if top_level_data else None
     
     return Response({
         'courses': CourseListSerializer(courses, many=True, context={'request': request}).data,
