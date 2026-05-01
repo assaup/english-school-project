@@ -93,29 +93,54 @@ english-school-project/
 
 ## API Endpoints
 
+### Аутентификация
 | Метод | URL | Описание |
 |---|---|---|
 | POST | `/api/auth/login/` | Получить JWT токены |
-| POST | `/api/auth/refresh/` | Обновить access токен |
-| POST | `/api/auth/register/` | Регистрация |
-| GET, POST | `/api/users/` | Пользователи (фильтр `?role=teacher`) |
-| POST | `/api/users/<id>/role/` | Назначить роль |
-| GET | `/api/courses/` | Список курсов |
-| GET | `/api/courses/<id>/` | Детали курса |
+| POST | `/api/auth/register/` | Регистрация нового пользователя |
+
+### Пользователи
+| Метод | URL | Описание |
+|---|---|---|
+| GET | `/api/users/` | Список пользователей (фильтр `?role=teacher`) |
+| POST | `/api/users/<id>/role/` | Назначить роль пользователю |
+
+### Курсы
+| Метод | URL | Описание |
+|---|---|---|
+| GET | `/api/courses/` | Список курсов (поиск, сортировка) |
+| GET | `/api/courses/<id>/` | Детальная страница курса |
 | POST | `/api/courses/create/` | Создать курс |
 | PATCH | `/api/courses/<id>/update/` | Обновить курс |
 | DELETE | `/api/courses/<id>/delete/` | Удалить курс |
-| GET, POST | `/api/courses/<id>/lessons/` | Уроки курса |
-| PATCH, DELETE | `/api/lessons/<id>/` | Урок |
-| GET, POST | `/api/courses/<id>/teachers/` | Преподаватели курса |
-| DELETE | `/api/courses/<id>/teachers/<user_id>/` | Снять преподавателя |
-| GET, POST | `/api/courses/<id>/enrollments/` | Записи на курс |
-| PATCH, DELETE | `/api/enrollments/<id>/` | Запись |
-| GET | `/api/home/` | Данные главной страницы |
-| GET | `/api/levels/` | Уровни языка |
-| GET | `/api/my-courses/` | Мои курсы |
+
+### Уроки
+| Метод | URL | Описание |
+|---|---|---|
+| GET, POST | `/api/courses/<id>/lessons/` | Список уроков / создать урок |
+| PATCH, DELETE | `/api/lessons/<id>/` | Редактировать / удалить урок |
+
+### Преподаватели курса
+| Метод | URL | Описание |
+|---|---|---|
+| GET, POST | `/api/courses/<id>/teachers/` | Список / добавить преподавателя |
+| DELETE | `/api/courses/<id>/teachers/<user_id>/` | Снять преподавателя с курса |
+
+### Записи на курс
+| Метод | URL | Описание |
+|---|---|---|
+| GET, POST | `/api/courses/<id>/enrollments/` | Список / добавить запись |
+| PATCH, DELETE | `/api/enrollments/<id>/` | Редактировать / удалить запись |
+
+### Прочее
+| Метод | URL | Описание |
+|---|---|---|
+| GET | `/api/home/` | Данные для главной страницы |
+| GET | `/api/levels/` | Список уровней |
+| GET | `/api/my-courses/` | Курсы текущего пользователя |
 
 ---
+```
 
 ## Установка и запуск
 
