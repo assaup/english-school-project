@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from faker import Faker
 import random
-from backend.learning.models import (
+from learning.models import (
     Role, Level, User, UserRole,
     Course, TeacherCourse, UserCourse,
     Lesson, Exercise, ExerciseType, Result
