@@ -53,4 +53,5 @@ Thumbs.db
 htmlcov/
 .pytest_cache/
 
+# sql
 sql/
