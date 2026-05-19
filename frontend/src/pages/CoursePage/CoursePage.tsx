@@ -50,7 +50,7 @@ const CoursePage = () => {
                 <div className={styles.heroContent}>
                     <div className={styles.heroMeta}>
                         <div className={styles.info}>
-                            <img src="https://englex.ru/app/uploads/2026/02/icon_sale_24x24.svg" alt="" />
+                            <img src="https://englex.ru/app/uploads/2026/02/icon_sale_24x24.svg" alt="Иконка скидки" />
                             <p>Скидка до 50%</p>
                         </div>
                         <div className={styles.info}>

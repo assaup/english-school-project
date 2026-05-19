@@ -16,7 +16,7 @@
 }
 
 .slide {
-    flex: 0 0 calc((100% - 40px) / 3); // (100% - gap*2) / visible
+    flex: 0 0 calc(100% / 3);
     min-width: 0;
 }
 
@@ -59,20 +59,71 @@
 }
 
 .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: none;
-    background: #ddd;
-    cursor: pointer;
-    padding: 0;
-    transition: all 0.2s;
+    position: relative;
 
-    &:hover { background: var(--color-accent); }
+    width: 44px;
+    height: 44px;
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    &::before{
+        content: '';
+
+        width: 8px;
+        height: 8px;
+
+        border-radius: 999px;
+
+        background: #ddd;
+
+        transition: all .2s;
+    }
+
+    &:hover::before{
+        background: var(--color-accent);
+    }
 }
 
 .dotActive {
-    background: var(--color-accent);
-    width: 24px;
-    border-radius: 4px;
+
+    &::before{
+        width: 24px;
+        border-radius: 999px;
+        background: var(--color-accent);
+    }
+}
+
+@media (max-width: 1024px) {
+    .slide {
+        flex: 0 0 calc(100% / 2);
+    }
+}
+
+@media (max-width: 768px) {
+    .slide {
+        flex: 0 0 100%;
+    }
+    .arrow {
+        width: 3.6rem;
+        height: 3.6rem;
+        font-size: 1.6rem;
+    }
+    .dots {
+        margin-top: 16px;
+    }
+    
+}
+@media (max-width: 480px) {
+    .arrow {
+        display: none;
+    }
 }

@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import api from '../../api/axios'
 import type { HomeData } from '../../types'
-import styles from './HomePage.module.scss'
 import Button from '../../components/Button/Button'
 import recruiterImg from '../../img/recruiter.png';
 import studyOnlineImg from '../../img/study-online.jpg';
 import CourseCard from '../../components/CourseCard/CourseCard'
 import TeacherSlider from '../../components/TeacherSlider/TeacherSlider'
+import styles from './HomePage.module.scss'
+
 
 
 const HomePage = () => {
@@ -63,7 +64,7 @@ const HomePage = () => {
                     <div className={styles.contentWrapper}>
                         <div className={styles.listWrapper}>
                             <div className={styles.info}>
-                                <img src="https://englex.ru/app/uploads/2026/02/icon_sale_24x24.svg" alt="" />
+                                <img src="https://englex.ru/app/uploads/2026/02/icon_sale_24x24.svg" alt="Иконка скидки" />
                                 <p>Скидка до 50%</p>
                             </div>
                             <div className={`${styles.info} ${styles.info_accent}`}>
@@ -78,7 +79,7 @@ const HomePage = () => {
                         </Button>
                     </div>
                     <div>
-                        <img className={styles.img} src={recruiterImg} alt="" />
+                        <img className={styles.img} src={recruiterImg} alt="Рекрутер Анна" />
                     </div>
                     
                 </div>
@@ -94,7 +95,7 @@ const HomePage = () => {
                         <div className={styles.card}>
                             <img 
                                 className={styles.card__img} 
-                                src="https://englex.ru/app/uploads/icon-study-b-n.svg" alt="icon-study-b-n.svg" 
+                                src="https://englex.ru/app/uploads/icon-study-b-n.svg" alt="Иконка обучение" 
                             />
                             <h3 className={styles.card__title}>Сильные преподаватели</h3>
                             <p className={styles.card__text}>Научат говорить на английском правильно и уверенно</p>
@@ -102,7 +103,7 @@ const HomePage = () => {
                         <div className={styles.card}>
                             <img 
                                 className={styles.card__img} 
-                                src="https://englex.ru/app/uploads/icon-property-b-n.svg" alt="icon-study-b-n.svg" 
+                                src="https://englex.ru/app/uploads/icon-property-b-n.svg" alt="Иконка общение" 
                             />
                             <h3 className={styles.card__title}>Обучение через общение</h3>
                             <p className={styles.card__text}>Говорите по-английски с первого урока, даже если учите язык с нуля</p>
@@ -110,7 +111,7 @@ const HomePage = () => {
                         <div className={styles.card}>
                             <img 
                                 className={styles.card__img} 
-                                src="https://englex.ru/app/uploads/icon-heart-app-b-n.svg" alt="icon-study-b-n.svg" 
+                                src="https://englex.ru/app/uploads/icon-heart-app-b-n.svg" alt="Иконка сердце" 
                             />
                             <h3 className={styles.card__title}>Человеческий подход</h3>
                             <p className={styles.card__text}>Курс на индивидуальное, а не конвейерное обучение английскому</p>
@@ -126,7 +127,9 @@ const HomePage = () => {
                     <p className={styles.section__text}>Выучить язык для работы, общения, путешествий, саморазвития — какой бы ни была ваша цель, поможем ее достичь.</p>
                     
                     <form onSubmit={handleSearch} className={styles.search}>
+                        <label htmlFor="search" className='visually-hidden'>Поиск</label>
                         <input
+                            id='search'
                             type="text"
                             value={search}
                             onChange={e => setSearch(e.target.value)}
@@ -177,12 +180,12 @@ const HomePage = () => {
                     
                     <div className={styles.classroom}>
                         <div className={styles.classroom__image_box}>
-                            <img src={studyOnlineImg} alt="" />
+                            <img src={studyOnlineImg} alt="Онлайн-урок английского языка" />
                         </div>
                         <div className={styles.classroom__features}>
                             <div className={styles.feature}>
                                 <div className={styles.feature__icon_wrapper}>
-                                    <img src="https://englex.ru/app/uploads/icon-property-ng-d.svg" alt="" />
+                                    <img src="https://englex.ru/app/uploads/icon-property-ng-d.svg" alt="Иконка ноутбук" />
                                 </div>
                                 <div className={styles.feature__info}>
                                     <h3 className={styles.feature__title}>Все в одном месте</h3>
@@ -191,7 +194,7 @@ const HomePage = () => {
                             </div>
                             <div className={styles.feature}>
                                 <div className={styles.feature__icon_wrapper}>
-                                    <img src="https://englex.ru/app/uploads/icon-social-ng-d.svg" alt="" />
+                                    <img src="https://englex.ru/app/uploads/icon-social-ng-d.svg" alt="Иконка люди" />
                                 </div>
                                 <div >
                                     <h3 className={styles.feature__title}>Совместная работа</h3>
@@ -200,7 +203,7 @@ const HomePage = () => {
                             </div>
                             <div className={styles.feature}>
                                 <div className={styles.feature__icon_wrapper}>
-                                    <img src="https://englex.ru/app/uploads/icon-settings-ng-d.svg" alt="" />
+                                    <img src="https://englex.ru/app/uploads/icon-settings-ng-d.svg" alt="Иконка параметры" />
                                 </div>
                                 <div >
                                     <h3 className={styles.feature__title}>Адаптивный учебник</h3>

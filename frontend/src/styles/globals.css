@@ -16,3 +16,10 @@ button {
   outline-offset: 4px;
   transition-duration: 0s !important;
 }
+
+button:focus,
+a:focus,
+input:focus,
+select:focus {
+  outline: 3px solid #005fcc;
+}

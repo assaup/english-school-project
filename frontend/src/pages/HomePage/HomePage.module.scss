@@ -211,3 +211,258 @@
     font-size: 1rem;
     padding: 20px 0;
 }
+
+@media (max-width: 1024px) {
+
+    .section {
+        padding: 60px 0;
+
+        &__title{
+            font-size: 4rem;
+        }
+
+        &__text{
+            font-size: 2rem;
+            margin-bottom: 4rem;
+        }
+    }
+
+    .wrapper{
+        align-items: center;
+        gap: 4rem;
+    }
+
+    .contentWrapper{
+        max-width: 50%;
+    }
+
+    .titleFirst{
+        font-size: 5.5rem;
+    }
+
+    .img{
+        position: static;
+        width: 100%;
+        max-width: 450px;
+        height: auto;
+    }
+
+    .recruiter{
+        margin-right: 0;
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .classroom{
+        gap: 4rem;
+    }
+
+    .classroom__image_box{
+        width: 55%;
+    }
+}
+
+
+
+@media (max-width: 768px) {
+
+    .container{
+        padding: 0 16px;
+    }
+
+    .section {
+        padding: 50px 0;
+
+        &__title{
+            font-size: 3.2rem;
+            line-height: 1.2;
+        }
+
+        &__text{
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
+        }
+    }
+
+    .wrapper{
+        flex-direction: column;
+        text-align: center;
+        gap: 3rem;
+    }
+
+    .contentWrapper{
+        max-width: 100%;
+    }
+
+    .listWrapper{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .info{
+        margin-right: 0;
+    }
+
+    .titleFirst{
+        font-size: 4rem;
+        line-height: 1.1;
+    }
+
+    .text{
+        font-size: 1.8rem;
+        margin-bottom: 3rem;
+    }
+
+    .img{
+        width: 100%;
+        max-width: 340px;
+        height: auto;
+    }
+
+    .recruiter{
+        text-align: center;
+        margin: 2rem 0 0;
+        padding: 0 1rem;
+        font-size: 1.4rem;
+    }
+
+
+    // Карточки
+
+    .cards{
+        grid-template-columns: 1fr;
+    }
+
+    .card{
+        padding: 2.4rem;
+
+        &__title{
+            font-size: 2.4rem;
+        }
+
+        &__text{
+            font-size: 1.7rem;
+        }
+    }
+
+
+    // Поиск
+
+    .search{
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search__input{
+        width: 100%;
+    }
+
+
+    // Онлайн класс
+
+    .classroom{
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .classroom__image_box{
+        width: 100%;
+    }
+
+
+    // Features
+
+    .feature{
+        gap: 1.6rem;
+        margin-bottom: 3rem;
+        align-items: flex-start;
+
+        &__icon_wrapper{
+            width: 48px;
+            flex-shrink: 0;
+        }
+
+        &__title{
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        &__text{
+            font-size: 1.6rem;
+        }
+    }
+
+
+    // Stats
+
+    .stats{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat{
+        padding: 2.4rem 1.6rem;
+
+        &__number{
+            font-size: 4rem;
+        }
+
+        &__label{
+            font-size: 1.6rem;
+        }
+    }
+}
+
+
+
+@media (max-width: 480px) {
+
+    .section {
+
+        &__title{
+            font-size: 2.8rem;
+        }
+
+        &__text{
+            font-size: 1.6rem;
+        }
+    }
+
+    .titleFirst{
+        font-size: 3.2rem;
+    }
+
+    .text{
+        font-size: 1.6rem;
+    }
+
+    .info{
+        width: 100%;
+        justify-content: center;
+    }
+
+    .card{
+        padding: 2rem;
+    }
+
+    .card__title{
+        font-size: 2rem;
+    }
+
+    .card__text{
+        font-size: 1.5rem;
+    }
+
+    .stats{
+        grid-template-columns: 1fr;
+    }
+
+    .stat__number{
+        font-size: 3.2rem;
+    }
+
+    .showMoreWrapper{
+        margin-top: 3rem;
+    }
+}

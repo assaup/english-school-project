@@ -13,13 +13,13 @@ const Footer = () => {
 
                     <div className={styles.nav}>
                         <div className={styles.navCol}>
-                            <h4>Обучение</h4>
+                            <h3>Обучение</h3>
                             <Link to="/">Курсы</Link>
                             <Link to="/">Преподаватели</Link>
                             <Link to="/">Первый урок бесплатно</Link>
                         </div>
                         <div className={styles.navCol}>
-                            <h4>Аккаунт</h4>
+                            <h3>Аккаунт</h3>
                             <Link to="/login">Войти</Link>
                             <Link to="/register">Регистрация</Link>
                             <Link to="/dashboard">Личный кабинет</Link>
