@@ -213,3 +213,12 @@
         font-size: 1.7rem;
     }
 }
+
+@media print {
+    .header {
+        display: none !important;
+    }
+    .mobileMenu {
+        display: none !important;
+    }
+}

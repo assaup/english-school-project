@@ -238,3 +238,202 @@
   justify-content: flex-end;
 }
 
+
+@media (max-width: 1024px) {
+  .hero {
+    gap: 3rem;
+    padding-block: 4rem;
+  }
+ 
+  .titleFirst {
+    font-size: 5rem;
+  }
+ 
+  .description {
+    font-size: 2rem;
+  }
+}
+ 
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 3.2rem;
+    padding-block: 3.2rem;
+  }
+ 
+  .hero > div:last-child {
+    width: 100%;
+  }
+ 
+  .titleFirst {
+    font-size: 4rem;
+  }
+ 
+  .description {
+    font-size: 1.8rem;
+    max-width: 100%;
+  }
+ 
+  .heroMeta {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+ 
+  .stats {
+    gap: 2rem;
+  }
+ 
+  .actions {
+    flex-wrap: wrap;
+ 
+    > * {
+      flex: 1;
+    }
+  }
+ 
+  .section {
+    padding: 48px 0;
+ 
+    &__title {
+      font-size: 3.6rem;
+    }
+ 
+    &__text {
+      font-size: 2rem;
+      margin-bottom: 3.2rem;
+    }
+  }
+}
+ 
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+ 
+  .hero {
+    padding-block: 2.4rem;
+    gap: 2.4rem;
+  }
+ 
+  .titleFirst {
+    font-size: 3.2rem;
+  }
+ 
+  .description {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+ 
+  .heroMeta {
+    margin-bottom: 1.4rem;
+  }
+ 
+  .stats {
+    gap: 1.6rem;
+    flex-wrap: wrap;
+  }
+ 
+  .stat {
+    font-size: 1.4rem;
+  }
+ 
+  .actions {
+    flex-direction: column;
+ 
+    > * {
+      width: 100%;
+    }
+  }
+ 
+  .section {
+    padding: 32px 0;
+ 
+    &__title {
+      font-size: 2.8rem;
+    }
+  }
+ 
+  .lessonCard {
+    padding: 1.6rem;
+    gap: 1.4rem;
+  }
+ 
+  .lessonTitle {
+    font-size: 1.7rem;
+  }
+ 
+  .lessonDesc {
+    font-size: 1.4rem;
+  }
+}
+
+
+@media print {
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+ 
+  .hero {
+    display: block;
+    padding-block: 2rem;
+  }
+ 
+  .actions {
+    display: none !important;
+  }
+ 
+  .heroMeta .info:first-child {
+    display: none !important;
+  }
+ 
+  .hero > div:last-child {
+    display: none !important;
+  }
+ 
+  .teachersSection {
+    display: none !important;
+  }
+ 
+  .modal {
+    display: none !important;
+  }
+ 
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+ 
+  .lessonCard {
+    border: 1px solid #ddd;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+ 
+  .titleFirst {
+    font-size: 3.6rem;
+  }
+ 
+  .section {
+    padding: 2rem 0;
+  }
+ 
+  .section__title {
+    font-size: 3rem;
+  }
+ 
+  .badge,
+  .lessonNum,
+  .exerciseBadge {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+ 
+  .section:has(.lessons) {
+    break-before: page;
+    page-break-before: always;
+  }
+}

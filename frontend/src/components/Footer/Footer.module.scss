@@ -202,3 +202,9 @@
         gap: 1rem;
     }
 }
+
+@media print {
+    .footer {
+        display: none !important;
+    }
+}

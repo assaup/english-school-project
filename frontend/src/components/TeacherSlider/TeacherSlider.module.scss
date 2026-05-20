@@ -127,3 +127,29 @@
         display: none;
     }
 }
+
+
+@media print {
+    .arrow,
+    .dots {
+        display: none !important;
+    }
+ 
+    .slider {
+        padding: 0;
+    }
+    .track,
+    .card_container {
+        overflow: visible;
+    }
+ 
+    .inner {
+        transform: none !important;
+        transition: none !important;
+        flex-wrap: wrap;
+    }
+ 
+    .slide {
+        flex: 0 0 calc(100% / 3);
+    }
+}
