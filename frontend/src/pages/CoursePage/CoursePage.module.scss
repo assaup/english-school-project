@@ -399,6 +399,10 @@
   .modal {
     display: none !important;
   }
+  // .section_teachers{
+  //   display: none !important;
+  // }
+  
  
   * {
     box-shadow: none !important;
@@ -411,6 +415,10 @@
     border: 1px solid #ddd;
     break-inside: avoid;
     page-break-inside: avoid;
+    padding: 10px 24px;
+  }
+  .lessonDesc{
+    display: none;
   }
  
   .titleFirst {
@@ -432,8 +440,13 @@
     -webkit-print-color-adjust: exact;
   }
  
-  .section:has(.lessons) {
-    break-before: page;
-    page-break-before: always;
+  .stats{
+    margin-bottom: 0;
+  }
+  .section{
+    padding: 10px;
+  }
+  .section__text_teachers{
+    display: none;
   }
 }

@@ -96,9 +96,9 @@ const CoursePage = () => {
             </section>
 
             {course.teachers.length > 0 && (
-                    <section className={styles.section}>
+                    <section className={`${styles.section} ${styles.section_teachers}`}>
                         <h2 className={styles.section__title}>Преподаватели курса</h2>
-                            <p className={styles.section__text}>
+                            <p className={`${styles.section__text} ${styles.section__text_teachers}`}>
                                 Опытные специалисты, которые проведут вас через всю программу курса
                             </p>
                             <TeacherSlider teachers={course.teachers ?? [] as Teacher[]}/>
