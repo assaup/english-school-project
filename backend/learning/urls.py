@@ -27,6 +27,9 @@ urlpatterns = [
     path('api/courses/<int:pk>/enrollments/', api_views.course_enrollments_view, name='api_course_enrollments'),
     path('api/enrollments/<int:pk>/', api_views.enrollment_detail_view, name='api_enrollment_detail'),
 
+    # Результаты
+    path('api/results/', api_views.results_view, name='api_results'),
+
     # Пользователи
     path('api/users/', api_views.users_view, name='api_users'),
     path('api/users/<int:pk>/role/', api_views.user_set_role_view, name='api_user_set_role'),
