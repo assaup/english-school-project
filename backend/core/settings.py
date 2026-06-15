@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'silk',
+    'django_celery_beat',
 ]
 
 MEDIA_URL = '/media/'
@@ -106,6 +107,32 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
 ]
+
+# ─── Email — Mailhog (локальный SMTP-перехватчик для разработки) ─────────────
+# Запуск: docker run -d -p 1025:1025 -p 8025:8025 mailhog/mailhog
+# Веб-интерфейс входящих писем: http://localhost:8025
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config('EMAIL_HOST', default='localhost')
+EMAIL_PORT = config('EMAIL_PORT', default=1025, cast=int)
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'noreply@englobe.com'
+
+# ─── Celery — брокер задач (Redis) ───────────────────────────────────────────
+# Запуск Redis: docker run -d -p 6379:6379 redis
+# Запуск воркера: celery -A core worker --loglevel=info
+# Запуск планировщика: celery -A core beat --loglevel=info
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default='redis://localhost:6379/0')
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_TASK_TRACK_STARTED = True
+
+# Периодические задачи (Celery Beat)
+CELERY_BEAT_SCHEDULE = {
+    'mark-expired-enrollments-hourly': {
+        'task': 'learning.tasks.mark_expired_enrollments',
+        'schedule': 3600.0,  # каждый час
+    },
+}
 
 # ─── Django Silk — профилирование SQL-запросов и времени ответа ──────────────
 SILKY_PYTHON_PROFILER = True          # включить Python-профилировщик

@@ -1,0 +1,57 @@
+.page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background: var(--color-gray-bg);
+}
+
+.card {
+    background: var(--color-white);
+    border-radius: var(--border-radius-card);
+    padding: 6rem 5rem;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.code {
+    font-size: 9.6rem;
+    font-weight: 800;
+    color: #e94560;
+    line-height: 1;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+}
+
+.title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 1.2rem;
+}
+
+.subtitle {
+    font-size: 1.7rem;
+    color: var(--color-gray);
+    margin-bottom: 3.6rem;
+    line-height: 1.5;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1.4rem 3.2rem;
+    background: var(--color-accent);
+    color: var(--color-white);
+    border-radius: 12px;
+    font-size: 1.7rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity var(--transition-duration);
+
+    &:hover {
+        opacity: 0.88;
+    }
+}

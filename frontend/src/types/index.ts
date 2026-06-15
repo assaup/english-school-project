@@ -11,6 +11,7 @@ export interface User {
     last_name: string
     email: string
     level: Level | null
+    role: 'teacher' | 'student' | 'admin' | null
 }
 
 export interface ExerciseType {

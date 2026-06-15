@@ -21,6 +21,11 @@ api.interceptors.response.use(
     async (error: AxiosError) => {
         const original = error.config as InternalAxiosRequestConfig & { _retry?: boolean }
         
+        if (error.response?.status === 403) {
+            window.location.href = '/403'
+            return Promise.reject(error)
+        }
+
         if (error.response?.status === 401 && !original._retry){
             original._retry = true
 

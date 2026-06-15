@@ -10,10 +10,17 @@ class LevelSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     level = LevelSerializer(read_only=True)
+    role = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'level']
+        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'level', 'role']
+
+    def get_role(self, obj) -> str | None:
+        if obj.is_superuser or obj.roles.filter(name='admin').exists():
+            return 'admin'
+        role = obj.roles.filter(name__in=['teacher', 'student']).first()
+        return role.name if role else None
 
 
 class ExerciseTypeSerializer(serializers.ModelSerializer):
@@ -175,7 +182,7 @@ class LessonWriteSerializer(serializers.ModelSerializer):
 
 
 class EnrollmentSerializer(serializers.ModelSerializer):
-    """Сериализатор для записи студента на курс (с валидацией дубликатов и прогресса)."""
+    """Сериализатор для записи студента на курс"""
 
     class Meta:
         model = UserCourse
@@ -189,7 +196,7 @@ class EnrollmentSerializer(serializers.ModelSerializer):
         return value
 
     def validate(self, attrs: dict) -> dict:
-        """Студент не может быть записан на один курс дважды."""
+        """Студент не может быть записан на один курс дважды"""
         user = attrs.get('user')
         course = self.context.get('course')
         if user and course:

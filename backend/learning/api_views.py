@@ -17,6 +17,7 @@ from .serializers import (
 )
 from .permissions import IsAdminRole, IsAdminOrTeacher
 from .filters import CourseFilter
+from .tasks import send_enrollment_email
 
 
 def _annotate_courses(qs):
@@ -291,6 +292,15 @@ def course_enrollments_view(request, pk):
     )
     serializer.is_valid(raise_exception=True)
     enrollment = serializer.save(course=course)
+
+    # Асинхронное письмо студенту через Celery + Mailhog
+    if enrollment.user.email:
+        send_enrollment_email.delay(
+            user_email=enrollment.user.email,
+            user_name=enrollment.user.get_full_name() or enrollment.user.username,
+            course_title=course.title,
+        )
+
     return Response(UserCourseAdminSerializer(enrollment).data, status=201)
 
 
