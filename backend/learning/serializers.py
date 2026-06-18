@@ -201,7 +201,7 @@ class EnrollmentSerializer(serializers.ModelSerializer):
         course = self.context.get('course')
         if user and course:
             existing = UserCourse.objects.filter(user=user, course=course)
-            if self.instance:
+            if self.instance:   
                 existing = existing.exclude(pk=self.instance.pk)
             if existing.exists():
                 raise serializers.ValidationError(
