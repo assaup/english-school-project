@@ -17,10 +17,15 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'first_name', 'last_name', 'email', 'level', 'role']
 
     def get_role(self, obj) -> str | None:
-        if obj.is_superuser or obj.roles.filter(name='admin').exists():
+        # Используем obj.roles.all() (а не .filter()), чтобы задействовать
+        # prefetch_related('roles') и не делать лишних запросов на каждого пользователя.
+        role_names = {r.name for r in obj.roles.all()}
+        if obj.is_superuser or 'admin' in role_names:
             return 'admin'
-        role = obj.roles.filter(name__in=['teacher', 'student']).first()
-        return role.name if role else None
+        for name in ('teacher', 'student'):
+            if name in role_names:
+                return name
+        return None
 
 
 class ExerciseTypeSerializer(serializers.ModelSerializer):
@@ -45,7 +50,26 @@ class LessonSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'description', 'order', 'exercises']
 
 
-class CourseListSerializer(serializers.ModelSerializer):
+class EnrolledFlagMixin:
+    """Добавляет is_enrolled без N+1: множество id записанных курсов
+    запрашивается один раз и кэшируется в контексте сериализатора."""
+
+    def get_is_enrolled(self, obj) -> bool:
+        request = self.context.get('request')
+        if not request or not request.user.is_authenticated:
+            return False
+        enrolled_ids = self.context.get('enrolled_course_ids')
+        if enrolled_ids is None:
+            enrolled_ids = set(
+                UserCourse.objects
+                .filter(user=request.user)
+                .values_list('course_id', flat=True)
+            )
+            self.context['enrolled_course_ids'] = enrolled_ids
+        return obj.id in enrolled_ids
+
+
+class CourseListSerializer(EnrolledFlagMixin, serializers.ModelSerializer):
     """Список курсов с аннотированными счётчиками и флагом записи текущего пользователя."""
 
     level = LevelSerializer(read_only=True)
@@ -65,15 +89,8 @@ class CourseListSerializer(serializers.ModelSerializer):
             'cover', 'video_url', 'created_at',
         ]
 
-    def get_is_enrolled(self, obj) -> bool:
-        """Возвращает True, если текущий пользователь записан на курс."""
-        request = self.context.get('request')
-        if not request or not request.user.is_authenticated:
-            return False
-        return UserCourse.objects.filter(user=request.user, course=obj).exists()
 
-
-class CourseDetailSerializer(serializers.ModelSerializer):
+class CourseDetailSerializer(EnrolledFlagMixin, serializers.ModelSerializer):
     """Детальная страница курса с уроками, преподавателями и флагом записи."""
 
     level = LevelSerializer(read_only=True)
@@ -88,13 +105,6 @@ class CourseDetailSerializer(serializers.ModelSerializer):
             'lessons', 'teachers', 'is_enrolled',
             'cover', 'video_url', 'created_at',
         ]
-
-    def get_is_enrolled(self, obj) -> bool:
-        """Возвращает True, если текущий пользователь записан на курс."""
-        request = self.context.get('request')
-        if not request or not request.user.is_authenticated:
-            return False
-        return UserCourse.objects.filter(user=request.user, course=obj).exists()
 
 
 class ResultSerializer(serializers.ModelSerializer):

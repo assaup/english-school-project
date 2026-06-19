@@ -54,7 +54,13 @@ class CourseDetailView(generics.RetrieveAPIView):
     serializer_class = CourseDetailSerializer
 
     def get_queryset(self):
-        return Course.objects.select_related('level').prefetch_related('teachers', 'lessons__exercises')
+        return Course.objects.select_related('level').prefetch_related(
+            Prefetch(
+                'teachers',
+                queryset=User.objects.select_related('level').prefetch_related('roles'),
+            ),
+            'lessons__exercises__exercise_type',
+        )
 
 
 @api_view(['GET'])
